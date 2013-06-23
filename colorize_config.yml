@@ -1,0 +1,22 @@
+# colorize-config.yaml
+# Configuration file for colorize-dirs.sh
+- 
+  dir: UXF-Services
+  color: red
+- 
+  dir: artisan_analytics
+  red: 180
+  green: 210
+  blue: 50
+- 
+  dir: UXF-Message-Server
+  color: yellow
+-
+  dir: UXFLIP-iOS
+  color: blue
+- 
+  dir: Android-SDK
+  color: green
+-
+  dir: AndroidDemoApp
+  color: green

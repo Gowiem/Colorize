@@ -6,13 +6,11 @@
 require "rubygems"
 require "optparse"
 require "yaml"
-require_relative "tab_colorer.rb"
-
-
+require File.dirname(File.expand_path(__FILE__)) + "/tab_colorer.rb"
 
 possible_colors = ['red', 'yellow', 'blue', 'green']
 options = {}
-current_directory, color, red, green, blue, config = nil
+current_directory, color, red, green, blue, colorize_config, silent = nil
 OptionParser.new do |opts|
 	opts.banner = "Usage: tab_colorer.rb [-s #{possible_colors.join(' | ')}] | [-c red_value, green_value, blue_value]"
 	opts.separator ""
@@ -34,22 +32,22 @@ OptionParser.new do |opts|
 	end
 
 	opts.on('-d', '--directory', 'Check the current directory to see if it matches any of the preconfigured directory in the colorize_config.yaml file') do
+		silent = true
 		current_directory = `pwd`
-		config = YAML.load_file('./colorize_config.yaml')
+		colorize_config = YAML.load_file(File.dirname(File.expand_path(__FILE__)) + '/colorize_config.yml')
 	end
 end.parse!
 
-if current_directory && config
-	puts "config: #{config}"
-	config.each do |dir_hash|
-		puts "dir_hash: #{dir_hash}"
-		puts "current_directory: #{current_directory}"
-
-		if dir_hash['dir'] =~ /#{current_directory}/
-			puts "dir included directory"
+if current_directory && colorize_config
+	colorize_config.each do |config|
+		if current_directory =~ /#{config['dir']}/
+			color = config['color']
+			red, green, blue = config['red'], config['green'], config['blue']
 		end
 	end
-elsif color
+end
+
+if color
 	unless possible_colors.include? color 
 		puts "The color you entered is not one of the possible values. \n" + 
 		  "tab_colorer only accepts one of these values: #{possible_colors.join(', ')}"
@@ -58,7 +56,7 @@ elsif color
 	TabColorer.send("#{color}_tab")
 elsif red && green && blue
 	TabColorer.change_tab_color(red, green, blue)
-else 
+elsif !silent
 	puts "You forgot to input a color. \n" +  
 	"Use -h to check the possible values for colorize"
 	exit
