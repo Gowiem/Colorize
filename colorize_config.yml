@@ -1,28 +1,47 @@
 # colorize-config.yaml
 # Configuration file for colorize-dirs.sh
-- 
+
+## Preconfigure Colors
+#######################
+
+-
+  color_name: dark-green
+  red: 19
+  green: 99
+  blue: 38
+
+## Assign Directory Colors
+###########################
+
+-
   dir: UXF-Services
   color: red
-- 
+-
   dir: artisan_analytics
   red: 180
   green: 210
   blue: 50
-- 
+-
   dir: UXF-Message-Server
   color: yellow
 -
   dir: UXFLIP-iOS
   color: blue
-- 
+-
   dir: Android-SDK
   color: green
 -
   dir: AndroidDemoApp
   color: green
-- 
+-
   dir: ThisIsHardcore
   color: blue
-- 
+-
   dir: ThisIsHardcore-Android
   color: green
+-
+  dir: dj_history
+  color: dark-green
+-
+  dir: first_project
+  color: dark-green
