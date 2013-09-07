@@ -20,3 +20,9 @@
 -
   dir: AndroidDemoApp
   color: green
+- 
+  dir: ThisIsHardcore
+  color: blue
+- 
+  dir: ThisIsHardcore-Android
+  color: green
